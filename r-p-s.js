@@ -12,31 +12,32 @@ function playRound(playerSelection, computerSelection){
     p1 = playerSelection.toLowerCase();
     p2 = computerSelection;
     if(p1 == "paper" && p2 == "rock"){
-        return "You Win! Paper beats Rock"
+        return ["You Win! Paper beats Rock", "player"]
     }
     else if(p1 == "rock" && p2 == "paper"){
-        return "You Lose! Paper beats Rock"
+        return ["You Lose! Paper beats Rock", "computer"]
     }
     else if(p1 == "rock" && p2 == "scissors"){
-        return "You Win! Rock beats Scissors"
+        return ["You Win! Rock beats Scissors", "player"]
     }
     else if(p1 == "scissors" && p2 == "rock"){
-        return "You Lose! Rock beats Scissors"
+        return ["You Lose! Rock beats Scissors", "computer"]
     }
     else if(p1 == "scissors" && p2 == "paper"){
-        return "You Win! Scissors beats paper"
+        return ["You Win! Scissors beats paper", "player"]
     }
     else if(p1 == "paper" && p2 == "scissors"){
-        return "You Lose! Scissors beats paper"
+        return ["You Lose! Scissors beats paper", "computer"]
     }
 
-    return "Its a draw!"
+    return ["Its a draw!", "draw"]
 }
 
 function game(player, computer){  
-    console.log(playRound(player, computer));    
+    let round_res = playRound(player, computer);
+    
+    return round_res;
 }
-
 
 //get all buttons on the page
 const btn_options = document.querySelectorAll("button");
@@ -54,6 +55,20 @@ btn_options.forEach((btn) => btn.addEventListener('click', (e) =>{
     console.log("You chose:", player_choice);
     console.log("Computer chose:", computer_choice);
 
-    //play and print round result
-    game(player_choice, computer_choice);
+    //play game and get results
+    const [game_msg, winner] = game(player_choice, computer_choice);
+
+    //if there is no draw, then update the winner's score  
+    if(winner !== "draw"){
+        const score_element = document.querySelector(`span[name="${winner}-score"]`); 
+        const update_score = document.createTextNode(Number(score_element.textContent) + 1);
+        score_element.removeChild(score_element.firstChild)
+        score_element.appendChild(update_score);
+        console.log(`The winner is ${winner}, ${game_msg}`);
+    }
+    else{
+        console.log(`The winner is ${winner}, ${game_msg}`);   
+    }
 }));
+
+
