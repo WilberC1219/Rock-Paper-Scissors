@@ -13,28 +13,26 @@
         </header>
     
         <!-- main portion of the page where the user is interacting with the page-->
-        <main id="main">
+         <!--rules section of the page-->
+         <section class="rules">
+            <p>The first player to win 3 out of 5 rounds is the winner</p>
+        </section>
 
-            <!--rules section of the page-->
-            <section class="rules">
-                <p>The first player to win 3 out of 5 rounds is the winner</p>
-            </section>
-
-            <!-- Display your choice and the computer's choice-->
-            <section class="game-log">
-                <div class="choices-log">
-                    <div class="player-log">
-                        <h2>Player</h2>
-                        <label name="player-choice">❔</label>
-                    </div>
-                    <div class="player-log">
-                        <h2>Computer</h2>
-                        <label name="player-choice">❔</label>
-                    </div>
+        <!-- Display your choice and the computer's choice-->
+        <section class="game-log">
+            <div class="choices-log">
+                <div class="player-log">
+                    <h2>Player</h2>
+                    <label name="player-choice">❔</label>
                 </div>
-                <p name="game-msg"> </p>
-            </section>
-
+                <div class="player-log">
+                    <h2>Computer</h2>
+                    <label name="player-choice">❔</label>
+                </div>
+            </div>
+            <p name="game-msg"> </p>
+        </section>
+        <main id="main-container">
 
             <!--players-->
             <section id="game-container" class="game-container">

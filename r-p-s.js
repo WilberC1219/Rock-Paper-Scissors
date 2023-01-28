@@ -125,6 +125,9 @@ function updateScore(winner){
     score_element.appendChild(update_score);
 }
 
+
+//new functions that need to be be documented
+
 function checkForWinner(){
     //get the scores of both computer and player
     const player_score = document.querySelector(`span[name="player-score"]`);
@@ -145,6 +148,30 @@ function checkForWinner(){
     return 0;
 }
 
+
+function displayPlayAgain(){
+    const play_again_btn = document.createElement("button")
+    play_again_btn.classList.add("play-again");
+    const play_again_text = document.createTextNode("Play again");
+    play_again_btn.appendChild(play_again_text);
+
+    const player_containers = document.getElementById(`game-container`);
+    player_containers.appendChild(play_again_btn);
+}
+
+function removePlayerContainers(){
+    const player_containers = document.getElementById(`game-container`);
+    
+    while(player_containers.firstChild){
+        player_containers.removeChild(player_containers.firstChild);
+    }
+}
+
+
+function gameOver(){
+    removePlayerContainers();
+    displayPlayAgain();
+}
 //get all buttons on the page
 const btn_options = document.querySelectorAll("button");
 
@@ -170,10 +197,12 @@ btn_options.forEach((btn) => btn.addEventListener('click', (e) =>{
     if(win_num == 1){
         updateGameLog(null, null, `congratulations, you beat the computer 3 out of 5!`);
         console.log(`congratulations you won, you beat the computer 3 out of 5!`);
+        gameOver();
     }
     else if(win_num == 2){
         updateGameLog(null, null, `You lost, the computer beat you 3 out of 5 :(`)
         console.log(`You lost the game, the computer beat you 3 out of 5 :(`);
+        gameOver();
     }
     else{
         console.log(`Neither you or computer have reached 3/5 wins`);
