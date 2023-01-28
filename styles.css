@@ -34,11 +34,12 @@ ul{
     list-style: none;
 }
 
-
-li{
+span{
+    color: orange;
+}
+li, label{
    width: 80px;
    height: 70px;
-   border: 0;
 }
 
 /*top portion of page*/
@@ -54,7 +55,7 @@ li{
 }
 
 .rules{
-    color: orange;
+    color: #ddd;
     font-size: 24px;
     text-align: center;
     padding: 18px 0;
@@ -68,6 +69,7 @@ li{
     justify-content: center;
     align-items: center;
     padding: 30px 42px;
+    color: #ddd;
 }
 
 .player-container{
@@ -90,3 +92,33 @@ li{
     gap:10px;
 
 }
+
+
+/*Game log */
+
+.game-log{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    color: #ddd;
+}
+
+.choices-log{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap:30px;
+}
+
+.player-log{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+
+
