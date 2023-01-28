@@ -44,6 +44,10 @@ li, label{
 
 main{
     padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 /*top portion of page*/
@@ -58,7 +62,7 @@ main{
     padding: 30px 42px;
 }
 
-.rules{
+h2, .rules{
     color: #ddd;
     font-size: 24px;
     text-align: center;
