@@ -16,7 +16,6 @@ function getComputerChoice(){
 }
 
 
-
 /** 
  * This function simulates the game being played between both the human player and
  * the computer.
@@ -92,15 +91,14 @@ function game(player_choice, computer_choice){
  */
 function updateGameLog(player_choice, computer_choice, result_message){
     //updates the game-log section, the player-choice labels
-    if(player_choice !== null && computer_choice !== null){
-        const [player, computer] = document.querySelectorAll(`label[name="player-choice"]`);
-        const player_icon = document.createTextNode(icon_map.get(player_choice));
-        const computer_icon = document.createTextNode(icon_map.get(computer_choice)); 
-        player.removeChild(player.firstChild);
-        computer.removeChild(computer.firstChild);
-        player.appendChild(player_icon);
-        computer.appendChild(computer_icon);
-    }
+    
+    const [player, computer] = document.querySelectorAll(`label[name="player-choice"]`);
+    const player_icon = document.createTextNode(icon_map.get(player_choice));
+    const computer_icon = document.createTextNode(icon_map.get(computer_choice)); 
+    player.removeChild(player.firstChild);
+    computer.removeChild(computer.firstChild);
+    player.appendChild(player_icon);
+    computer.appendChild(computer_icon);
 
     //updates the game-log section, the game-msg text
     const game_message = document.querySelector(`p[name="game-msg"]`);
@@ -126,8 +124,14 @@ function updateScore(winner){
 }
 
 
-//new functions that need to be be documented
-
+/**
+ *  The checkForWinner function will determine if there
+ *  is a winner who has won 3 rounds out of 5. 
+ * 
+ * @return return 0 if neither have won 3 out of 5 yet
+ * @return return 1 if the human player won
+ * @return return 2 if the computer won 
+ */
 function checkForWinner(){
     //get the scores of both computer and player
     const player_score = document.querySelector(`span[name="player-score"]`);
@@ -149,29 +153,62 @@ function checkForWinner(){
 }
 
 
+/**
+ * The displayPlayAgain will add display the "play again" button onto the screen
+ * once there is a winner between the computer and the human player
+ */
 function displayPlayAgain(){
+    //create button and add class 
     const play_again_btn = document.createElement("button")
     play_again_btn.classList.add("play-again");
     const play_again_text = document.createTextNode("Play again");
+
+    //add redirect attribute to the button
+    play_again_btn.addEventListener("click",  () => location.reload());
+
+    //append the text to the button
     play_again_btn.appendChild(play_again_text);
 
-    const player_containers = document.getElementById(`game-container`);
+    //add button to the main container
+    const player_containers = document.getElementById(`main-container`);
     player_containers.appendChild(play_again_btn);
 }
 
-function removePlayerContainers(){
-    const player_containers = document.getElementById(`game-container`);
+
+/**
+ * The clearMainContainer will remove all the nodes that exist in the 
+ * main html tag element of the page
+ */
+function clearMainContainer(){
+    const main_container = document.getElementById(`main-container`);
     
-    while(player_containers.firstChild){
-        player_containers.removeChild(player_containers.firstChild);
+    while(main_container.firstChild){
+        main_container.removeChild(main_container.firstChild);
     }
 }
 
+/**
+ * The gameOver function generates the end game screen
+ * 
+ * @param {end_message}- end_message, the final message after a player
+ * has won 3 out of 5 rounds 
+ */
+function gameOver(end_message){
+    //clear main container
+    clearMainContainer();
 
-function gameOver(){
-    removePlayerContainers();
+    //add end message
+    const main_container = document.getElementById(`main-container`);
+    const end_message_node = document.createElement("h2");
+    end_message_node.appendChild(document.createTextNode(end_message));
+    main_container.appendChild(end_message_node);
+
+    //add play again button
     displayPlayAgain();
 }
+
+
+
 //get all buttons on the page
 const btn_options = document.querySelectorAll("button");
 
@@ -195,14 +232,12 @@ btn_options.forEach((btn) => btn.addEventListener('click', (e) =>{
     //check to see who won 3/5 
     const win_num = checkForWinner();
     if(win_num == 1){
-        updateGameLog(null, null, `congratulations, you beat the computer 3 out of 5!`);
-        console.log(`congratulations you won, you beat the computer 3 out of 5!`);
-        gameOver();
+        console.log(`congratulations you won, you beat the computer 3 rounds out of 5!`);
+        gameOver(`congratulations you won, you beat the computer 3 rounds out of 5!`);
     }
     else if(win_num == 2){
-        updateGameLog(null, null, `You lost, the computer beat you 3 out of 5 :(`)
-        console.log(`You lost the game, the computer beat you 3 out of 5 :(`);
-        gameOver();
+        console.log(`You lost the game, the computer beat you 3 rounds out of 5 :(`);
+        gameOver(`You lost the game, the computer beat you 3 round out of 5 :(`);
     }
     else{
         console.log(`Neither you or computer have reached 3/5 wins`);
