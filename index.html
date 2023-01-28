@@ -12,76 +12,80 @@
             <h1>Rock Paper Scissors</h1>
         </header>
     
-        <!--rules section of the page-->
-        <section class="rules">
-            <p>The first player to win 3 out of 5 rounds is the winner</p>
-        </section>
+        <!-- main portion of the page where the user is interacting with the page-->
+        <main id="main">
 
-         <!-- Display your choice and the computer's choice-->
-        <section class="game-log">
-            <div class="choices-log">
-                <div class="player-log">
-                    <h2>Player</h2>
-                    <label name="player-choice">❔</label>
+            <!--rules section of the page-->
+            <section class="rules">
+                <p>The first player to win 3 out of 5 rounds is the winner</p>
+            </section>
+
+            <!-- Display your choice and the computer's choice-->
+            <section class="game-log">
+                <div class="choices-log">
+                    <div class="player-log">
+                        <h2>Player</h2>
+                        <label name="player-choice">❔</label>
+                    </div>
+                    <div class="player-log">
+                        <h2>Computer</h2>
+                        <label name="player-choice">❔</label>
+                    </div>
                 </div>
-                <div class="player-log">
-                    <h2>Computer</h2>
-                    <label name="player-choice">❔</label>
+                <p name="game-msg"> </p>
+            </section>
+
+
+            <!--players-->
+            <section id="game-container" class="game-container">
+                
+                <div class="player-container">
+                    <div class="player-info">
+                        <h1>You</h1>
+                        <h1>Score:
+                            <span name="player-score">
+                                0
+                            </span>
+                        </h1>
+                    </div>
+                    <ul>
+                        <li>
+                            <button name="rock-btn" value="rock">✊</button>
+                        </li>
+                        <li>
+                            <button name="paper-btn" value="paper">✋</button>
+                        </li>
+                        <li>
+                            <button name="scissors-btn" value="scissors">✌</button>
+                        </li>
+                    </ul> 
                 </div>
-            </div>
-            <p name="game-msg"> </p>
-        </section>
 
+                <br>
 
-        <!--players-->
-        <section class="game-container">
-            
-            <div class="player-container">
-                <div class="player-info">
-                    <h1>You</h1>
-                    <h1>Score:
-                        <span name="player-score">
-                            0
-                        </span>
-                    </h1>
+                <div class="player-container">
+                    <div class="player-info">
+                        <h1>Computer</h1>
+                        <h1>Score:
+                            <span name="computer-score">
+                                0
+                            </span>
+                        </h1>
+                    </div>
+                    <ul><!--Makes these non clickable -->
+                        <li>
+                            <label name="rock-btn" value="rock">✊</label>
+                        </li>
+                        <li>
+                            <label name="paper-btn" value="paper">✋</label>
+                        </li>
+                        <li>  
+                            <label name="scissors-btn" value="scissors">✌</label>
+                        </li>    
+                    </ul> 
                 </div>
-                <ul>
-                    <li>
-                        <button name="rock-btn" value="rock">✊</button>
-                    </li>
-                    <li>
-                        <button name="paper-btn" value="paper">✋</button>
-                    </li>
-                    <li>
-                        <button name="scissors-btn" value="scissors">✌</button>
-                    </li>
-                </ul> 
-            </div>
 
-            <br>
-
-            <div class="player-container">
-                <div class="player-info">
-                    <h1>Computer</h1>
-                    <h1>Score:
-                        <span name="computer-score">
-                            0
-                        </span>
-                    </h1>
-                </div>
-                <ul><!--Makes these non clickable -->
-                    <li>
-                        <label name="rock-btn" value="rock">✊</label>
-                    </li>
-                    <li>
-                        <label name="paper-btn" value="paper">✋</label>
-                    </li>
-                    <li>  
-                        <label name="scissors-btn" value="scissors">✌</label>
-                    </li>    
-                </ul> 
-            </div>
-        </section>
-        
+            </section>
+        </main>
     </body>
 </html>
