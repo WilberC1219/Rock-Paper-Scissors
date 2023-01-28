@@ -33,22 +33,22 @@ function playRound(player_choice, computer_choice){
     p1 = player_choice.toLowerCase();
     p2 = computer_choice;
     if(p1 == "paper" && p2 == "rock"){
-        return ["You Win! Paper beats Rock", "player"]
+        return ["You won the round! Paper beats Rock", "player"]
     }
     else if(p1 == "rock" && p2 == "paper"){
-        return ["You Lose! Paper beats Rock", "computer"]
+        return ["You lost the round! Paper beats Rock", "computer"]
     }
     else if(p1 == "rock" && p2 == "scissors"){
-        return ["You Win! Rock beats Scissors", "player"]
+        return ["You won the round! Rock beats Scissors", "player"]
     }
     else if(p1 == "scissors" && p2 == "rock"){
-        return ["You Lose! Rock beats Scissors", "computer"]
+        return ["You lost the round! Rock beats Scissors", "computer"]
     }
     else if(p1 == "scissors" && p2 == "paper"){
-        return ["You Win! Scissors beats paper", "player"]
+        return ["You won the round! Scissors beats paper", "player"]
     }
     else if(p1 == "paper" && p2 == "scissors"){
-        return ["You Lose! Scissors beats paper", "computer"]
+        return ["You lost the round! Scissors beats paper", "computer"]
     }
 
     return ["Its a draw!", "draw"]
@@ -92,14 +92,15 @@ function game(player_choice, computer_choice){
  */
 function updateGameLog(player_choice, computer_choice, result_message){
     //updates the game-log section, the player-choice labels
-    const [player, computer] = document.querySelectorAll(`label[name="player-choice"]`);
-    const player_icon = document.createTextNode(icon_map.get(player_choice));
-    const computer_icon = document.createTextNode(icon_map.get(computer_choice)); 
-    player.removeChild(player.firstChild);
-    computer.removeChild(computer.firstChild);
-    player.appendChild(player_icon);
-    computer.appendChild(computer_icon);
-
+    if(player_choice !== null && computer_choice !== null){
+        const [player, computer] = document.querySelectorAll(`label[name="player-choice"]`);
+        const player_icon = document.createTextNode(icon_map.get(player_choice));
+        const computer_icon = document.createTextNode(icon_map.get(computer_choice)); 
+        player.removeChild(player.firstChild);
+        computer.removeChild(computer.firstChild);
+        player.appendChild(player_icon);
+        computer.appendChild(computer_icon);
+    }
 
     //updates the game-log section, the game-msg text
     const game_message = document.querySelector(`p[name="game-msg"]`);
@@ -124,6 +125,25 @@ function updateScore(winner){
     score_element.appendChild(update_score);
 }
 
+function checkForWinner(){
+    //get the scores of both computer and player
+    const player_score = document.querySelector(`span[name="player-score"]`);
+    const computer_score = document.querySelector(`span[name="computer-score"]`);
+    console.log(`player has: ${Number(player_score.textContent)}`);
+    console.log(`computer has: ${Number(computer_score.textContent)}`);
+
+    //if anyones score reaches 3/5, they are automatically the winner
+    if(Number(player_score.textContent) / 5 >= (3/5)){
+        //player is the winner
+        return 1;
+    }
+    else if(Number(computer_score.textContent) / 5 >= (3/5)){
+        //computer is the winner
+        return 2;
+    }
+    //no winner yet
+    return 0;
+}
 
 //get all buttons on the page
 const btn_options = document.querySelectorAll("button");
@@ -144,6 +164,20 @@ btn_options.forEach((btn) => btn.addEventListener('click', (e) =>{
 
     //play game
     game(player_choice, computer_choice);
+
+    //check to see who won 3/5 
+    const win_num = checkForWinner();
+    if(win_num == 1){
+        updateGameLog(null, null, `congratulations, you beat the computer 3 out of 5!`);
+        console.log(`congratulations you won, you beat the computer 3 out of 5!`);
+    }
+    else if(win_num == 2){
+        updateGameLog(null, null, `You lost, the computer beat you 3 out of 5 :(`)
+        console.log(`You lost the game, the computer beat you 3 out of 5 :(`);
+    }
+    else{
+        console.log(`Neither you or computer have reached 3/5 wins`);
+    }
     console.log("-------game end-------")
 }));
 
