@@ -11,4 +11,4 @@ In order to choose one of the three, simply hover your mouse over and click on t
 
 The game is built using HTML, CSS, and JavaScript and it has an animation when the player and computer make their selections.
 
-Try the game now and see if you can beat the computer! [click here](https://www.google.com)
+Try the game now and see if you can beat the computer! [click here](https://wilberc1219.github.io/Rock-Paper-Scissors/)
